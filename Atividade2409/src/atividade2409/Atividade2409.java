@@ -10,38 +10,17 @@ package atividade2409;
  * @author 823145059
  */
 import java.util.Scanner;
+
 public class Atividade2409 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-         Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
        
-        double notaA1, notaA2, notaA3, total;
-       
-        System.out.print("Digite a nota da A1 (máx 30): ");
-        notaA1 = scanner.nextDouble();
-        while (notaA1 < 0 || notaA1 > 30) {
-            System.out.print("Nota inválida! Digite a nota da A1 (máx 30): ");
-            notaA1 = scanner.nextDouble();
-        }
-
-        System.out.print("Digite a nota da A2 (máx 30): ");
-        notaA2 = scanner.nextDouble();
-        while (notaA2 < 0 || notaA2 > 30) {
-            System.out.print("Nota inválida! Digite a nota da A2 (máx 30): ");
-            notaA2 = scanner.nextDouble();
-        }
-
-        System.out.print("Digite a nota da A3 (máx 40): ");
-        notaA3 = scanner.nextDouble();
-        while (notaA3 < 0 || notaA3 > 40) {
-            System.out.print("Nota inválida! Digite a nota da A3 (máx 40): ");
-            notaA3 = scanner.nextDouble();
-        }
-
-        total = notaA1 + notaA2 + notaA3;
+        double notaA1 = obterNota(scanner, "A1 (máx 30)");
+        double notaA2 = obterNota(scanner, "A2 (máx 30)");
+        double notaA3 = obterNota(scanner, "A3 (máx 40)");
+        
+        double total = notaA1 + notaA2 + notaA3;
 
         System.out.println("\nResultados:");
         System.out.printf("Nota A1: %.2f\n", notaA1);
@@ -51,4 +30,24 @@ public class Atividade2409 {
        
         scanner.close();
     }
-}
+
+    private static double obterNota(Scanner scanner, String tipo) {
+        double nota;
+        while (true) {
+            System.out.print("Digite a nota da " + tipo + ": ");
+            if (scanner.hasNextDouble()) {
+                nota = scanner.nextDouble();
+                if (tipo.equals("A1 (máx 30)") && (nota < 0 || nota > 30)) {
+                    System.out.println("Nota inválida! A nota deve estar entre 0 e 30.");
+                } else if (tipo.equals("A2 (máx 30)") && (nota < 0 || nota > 30)) {
+                    System.out.println("Nota inválida! A nota deve estar entre 0 e 30.");
+                } else if (tipo.equals("A3 (máx 40)") && (nota < 0 || nota > 40)) {
+                    System.out.println("Nota inválida! A nota deve estar entre 0 e 40.");
+                } else {
+                    break; // Saia do loop se a nota for válida
+                }
+            } else {
+                System.out.println("Entrada inválida! Por favor, insira um número.");
+                scanner.next(); // Limpa a entrada inválida
+            }
+        }
